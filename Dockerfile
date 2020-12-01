@@ -1,17 +1,17 @@
 FROM ubuntu:trusty
 MAINTAINER Rion Dooley <dooley@tacc.utexas.edu>
 
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv BC711F9BA15703C6 && \
-    sudo apt-key update && \
-    echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
-    apt-get update && \
-    apt-get install -y mongodb-database-tools python-pip && \
-    echo "mongodb-database-tools hold" | dpkg --set-selections && \
-    pip install awscli && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/* && \
-    mkdir /backup
+RUN sudo wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add - && \
+        echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
+        sudo apt-key update && \
+        sudo apt-get update && \
+        apt-get install -y mongodb-database-tools python-pip && \
+        echo "mongodb-database-tools hold" | dpkg --set-selections && \
+        pip install awscli && \
+        apt-get clean && \
+        rm -rf /var/lib/apt/lists/* && \
+        rm -rf /tmp/* && \
+        mkdir /backup
 
 ENV CRON_TIME="0 0 * * *"
 ENV S3_PATH=mongodb
