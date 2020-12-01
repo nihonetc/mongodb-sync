@@ -8,7 +8,6 @@ RUN apt-get update && \
         apt-key update && \
         apt-get update && \
         apt-get install -y mongodb-database-tools python-pip && \
-        echo "mongodb-database-tools hold" | dpkg --set-selections && \
         pip install awscli && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/* && \
