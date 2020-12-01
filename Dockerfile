@@ -1,7 +1,8 @@
 FROM ubuntu:18.04
 MAINTAINER Rion Dooley <dooley@tacc.utexas.edu>
 
-RUN apt-get install wget && \
+RUN apt-get update && \
+        apt-get install wget && \
         wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add - && \
         echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
         apt-key update && \
