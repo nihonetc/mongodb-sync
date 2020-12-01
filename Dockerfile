@@ -1,10 +1,11 @@
 FROM ubuntu:18.04
 MAINTAINER Rion Dooley <dooley@tacc.utexas.edu>
 
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add - && \
+RUN apt-get install wget && \
+        wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add - && \
         echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
-        sudo apt-key update && \
-        sudo apt-get update && \
+        apt-key update && \
+        apt-get update && \
         apt-get install -y mongodb-database-tools python-pip && \
         echo "mongodb-database-tools hold" | dpkg --set-selections && \
         pip install awscli && \
