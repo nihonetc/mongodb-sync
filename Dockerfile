@@ -4,7 +4,7 @@ MAINTAINER Rion Dooley <dooley@tacc.utexas.edu>
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv BC711F9BA15703C6 && \
     echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
     apt-get update && \
-    apt-get install -y mongodb-org-shell mongodb-org-tools python-pip && \
+    apt-get install -y mongodb-org-shell mongodb-database-tools python-pip && \
     echo "mongodb-org-shell hold" | dpkg --set-selections && \
     echo "mongodb-org-tools hold" | dpkg --set-selections && \
     pip install awscli && \
