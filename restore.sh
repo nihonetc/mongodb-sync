@@ -18,7 +18,7 @@ FILE_TO_RESTORE=${1}
 [[ -z "${1}" ]] && FILE_TO_RESTORE=$(ls /backup -N1 | grep -iv ".tgz" | sort -r | head -n 1)
 
 echo "=> Restore database from ${FILE_TO_RESTORE}"
-if mongorestore --drop --host ${MONGODB_RESTORE_HOST} --port ${MONGODB_RESTORE_PORT} ${USER_RESTORE_STR}${PASS_RESTORE_STR}${DB_RESTORE_STR} /backup/$FILE_TO_RESTORE; then
+if mongorestore --drop --host ${MONGODB_RESTORE_HOST} --port ${MONGODB_RESTORE_PORT} --username ${MONGODB_RESTORE_ENV_MONGODB_USER} --password ${MONGODB_RESTORE_ENV_MONGODB_PASS} /backup/$FILE_TO_RESTORE; then
     echo "   Restore succeeded"
 else
     echo "   Restore failed"
